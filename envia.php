@@ -13,7 +13,7 @@
     $cabeca = "From: ".$nome."\n"."Reply-to: ".$email."\n"."X=Mailer:PHP/".phpversion();
 
     if(mail($para,$assunto,$corpo,$cabeca)){
-        echo "<script type='text/javascript'>window.location.reload(true);</script>";
+        echo("E-mail enviado com sucesso!");
     }else{
         echo("Houve um erro ao enviar o e-mail!");
     }
