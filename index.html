@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="style.css">
 
     <script src="menu.js" defer></script>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+
 
     <title>Danilo Souza</title>
 </head>
@@ -169,7 +171,7 @@
             <div class="interface">
                 <h2 class="titulo">FALA <span>COMIGO.</span></h2>
 
-                <form id="meuFormulario">
+                <form id="contactForm">
                     <input type="text" placeholder="Seu Nome:" name="nome" required>
                     <input type="text" placeholder="Seu e-mail:" name="email" required>
                     <input type="text" placeholder="Seu celular:" name="telefone">
@@ -178,24 +180,20 @@
                 </form>
 
                 <script>
-                    function enviarFormulario() {
-                        var formulario = document.getElementById("meuFormulario");
-                        var dados = new FormData(formulario);
-                    
-                        fetch('envia.php', {
-                            method: 'POST',
-                            body: dados
-                        })
-                        .then(response => response.text())
-                        .then(data => {
-                            console.log(data);
-                            // faça algo com a resposta, se necessário
-                        })
-                        .catch((error) => {
-                            console.error('Erro:', error);
+                    (function() {
+                        emailjs.init("lBGKBXJcDb-aiQuOf");
+            
+                        document.getElementById('contactForm').addEventListener('submit', function(event) {
+                            event.preventDefault();
+                            emailjs.sendForm('service_idti61h', 'template_82bz09j', this)
+                                .then(function() {
+                                    alert('E-mail enviado com sucesso!');
+                                }, function(error) {
+                                    alert('Houve um erro ao enviar o e-mail: ' + error.text);
+                                });
                         });
-                    }
-                    </script>
+                    })();
+                </script>
             </div><!--interface-->
         </section><!--formulario-->
     </main>
